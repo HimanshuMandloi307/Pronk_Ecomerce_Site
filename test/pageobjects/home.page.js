@@ -3,7 +3,7 @@ import { $ } from '@wdio/globals';
 class homePage{
 
     get homepageTitle(){
-        return $(`//h2[contains(text(),'PRONK FESTIVE SALE ends in')]`);
+        return $(`//h2[contains(text(),'PRONK FESTIVE SALE | Extra 25% OFF')]`);
     }
 
     get hamburgerIcon(){

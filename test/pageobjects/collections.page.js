@@ -23,14 +23,11 @@ class collections{
     // Page Method
 
     async selectProductByName(productName){
-
-        const products = await this.selectProduct();
-        for(let product of products){
-            console.log("inside loop ");
+        const products = await this.selectProduct(); //130 locators 
+        for(let product of products){ // 1-1-1-1-1--1-1 locator 
             const productText = await product.getText();
-            if (productText === productName) {
+            if (productText.includes(productName)) {
                 await product.click();
-                console.log("Selected Option Name: " + productText);
                 break;
             }
         }

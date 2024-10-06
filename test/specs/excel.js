@@ -1,6 +1,6 @@
 //library for parsing JSON file
 const execlLib =require('xlsx')
-let fileData =execlLib.readFile('test/Data/Demo Data Automation testing.xlsx')
+let fileData =execlLib.readFile('test/Data/Demo_Data_Automation_testing.xlsx')
 // test suite name
 
 const sheetData = fileData.Sheets['Sheet1'];

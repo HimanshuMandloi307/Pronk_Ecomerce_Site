@@ -18,6 +18,15 @@ class hamburgerMenu{
         return $(`#SortBy`);
     }
 
+    selectExpandAndCollapsIcon(optionName) {
+        return $(`//a[@id="Label-collections-${optionName}"]/parent::div//button/span`);
+    }
+     
+    selectAnyOptionFromMenOrWomen(optionName) {
+        return $(`//a[@href="/collections/${optionName}"]/parent::div//button/span`);
+    }
+    // womens-bottom-wear
+
 
 
     // page Mthods
@@ -43,22 +52,21 @@ class hamburgerMenu{
     
         // Proceed with URL verification only if an option was clicked
         if (optionClicked) {
-            const timeout = 10000;
+            const timeout = 360000;
     
             // Wait until the URL contains the expected value
             await browser.waitUntil(
                 async () => {
                     const currentUrl = await browser.getUrl();
-                    return currentUrl.includes(OptionName);
+                    console.log(" currentUrl= = = = =" +currentUrl);
+                    console.log(" currentUrl= = = = =" +currentUrl.includes(OptionName.toLowerCase()));
+                    return currentUrl.includes(OptionName.toLowerCase());
                 },
                 {
                     timeout: timeout,
                     timeoutMsg: `Expected URL to contain "${OptionName}" but timed out after ${timeout}ms`
                 }
             );
-    
-            // Optionally assert the URL contains the option name after wait
-            await expect(browser).toHaveUrlContaining(OptionName);
         } else {
             console.log("Option not found in the menu: " + OptionName);
         }

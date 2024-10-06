@@ -1,15 +1,19 @@
-const excelLib = require('xlsx')
+const path = require('path');
+const excelLib = require('xlsx');
 
-class xlsx {
-
+class XlsxReader {
     async readDatafromExcel(excelFileName, excelSheetName) {
-        let fileData = excelLib.readFile(excelFileName);
-        const sheetData = fileData.Sheets[excelSheetName];
-        const data = excelLib.utils.sheet_to_json(sheetData);
-        console.log('=====' + JSON.stringify(data));
-        return data;
+        try {
+            const excelFilePath = path.resolve(excelFileName); // Ensures path is resolved properly4
+            let fileData = excelLib.readFile(excelFilePath);
+            const sheetData = fileData.Sheets[excelSheetName];
+            const data = excelLib.utils.sheet_to_json(sheetData);
+            console.log('Excel Data:', JSON.stringify(data));
+            return data;
+        } catch (error) {
+            console.error('Error reading Excel file:', error);
+        }
     }
+}
 
-};
-
-export default new xlsx();
+export default new XlsxReader();
