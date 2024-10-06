@@ -39,7 +39,7 @@ describe("Selct Product From menu and Purches", () => {
         const excelData = await xlsxReader.readDatafromExcel('test/Data/demo.xlsx', 'Sheet1');
         AllureReporter.addStep('Geting Data From Xlsx file and Sheet', true);
         await quickBuyPage.selectProductByName(excelData[0].ProductName);
-        await browser.pause(10000);
+        await browser.pause(5000);
         await console.log('==================' +await quickBuyPage.quickBuyPopProductHeader.isDisplayed());
         await expect(quickBuyPage.quickBuyPopProductHeader).toHaveText(excelData[0].ProductName);
         AllureReporter.addStep('Click on Product', true);
