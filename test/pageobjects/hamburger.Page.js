@@ -58,8 +58,6 @@ class hamburgerMenu{
             await browser.waitUntil(
                 async () => {
                     const currentUrl = await browser.getUrl();
-                    console.log(" currentUrl= = = = =" +currentUrl);
-                    console.log(" currentUrl= = = = =" +currentUrl.includes(OptionName.toLowerCase()));
                     return currentUrl.includes(OptionName.toLowerCase());
                 },
                 {

@@ -7,6 +7,7 @@ import collectionsPage from '../pageobjects/collections.page.js';
 import xlsxReader from '../utility/readDataFromexcel.js';
 import quickBuyPage from '../pageobjects/quickBuy.page.js';
 import cart from '../pageobjects/cart.js';
+import ordersummaryPage from '../pageobjects/ordersummary.page.js';
 
 describe("Selct Product From menu and Purches", () => {
 
@@ -39,17 +40,24 @@ describe("Selct Product From menu and Purches", () => {
         const excelData = await xlsxReader.readDatafromExcel('test/Data/demo.xlsx', 'Sheet1');
         AllureReporter.addStep('Geting Data From Xlsx file and Sheet', true);
         await quickBuyPage.selectProductByName(excelData[0].ProductName);
-        await browser.pause(5000);
-        await console.log('==================' +await quickBuyPage.quickBuyPopProductHeader.isDisplayed());
-        await expect(quickBuyPage.quickBuyPopProductHeader).toHaveText(excelData[0].ProductName);
+        await expect(quickBuyPage.quickBuyPopProductHeader).toHaveText(excelData[0].ProductName.toUpperCase());
         AllureReporter.addStep('Click on Product', true);
         await collectionsPage.selectSizeOption(excelData[0].Size);
         await collectionsPage.addToCartBtn.scrollIntoView();
         await collectionsPage.addToCartBtn.click();
         AllureReporter.addStep('Click on Add to Cart Button', true);
         await cart.increaseItemBtn.click();
+        const price = await cart.productSubTotalPrice.getText();
         await collectionsPage.placeOrderBtn.click();
         AllureReporter.addStep('Click on PlaceOrder button', true);
+        await browser.pause(10000);
+        await ordersummaryPage.expandOrderSummaryIcon.waitForDisplayed();
+        await browser.pause(5000);
+        await ordersummaryPage.expandOrderSummaryIcon.click();
+        await ordersummaryPage.subTotal.waitForDisplayed();
+        console.log("ordersummary payment>>>>>>>>>"+ordersummaryPage.subTotal.getText());
+        await expect(ordersummaryPage.subTotal).toHaveText(price);
+        await browser.pause(5000);
     })
 
 

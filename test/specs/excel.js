@@ -15,19 +15,6 @@ describe('Tutorialspoint application', function(){
         
         console.log('===============' +ProductName);
         console.log('///////' +Size);
-        //  launch url
-        //  browser.url('https://www.linkedin.com/login')  
-        //  //identify the email field then enter key - email
-        //  $("#username").setValue(email)
-        //  //identify password field then enter key - password
-        //  $("#password").setValue(password)
-        //  //identify Sign in button then click
-        //  $("button[type='submit']").click() 
-        //  //verify error message
-        //  const e = $('#error-for-password')
-        //  console.log(e.getText() + ' - Error Text') 
-        //  //verify Alert text with Chai assertion
-        //  c(e.getText()).to.equal("The password you provided must have at least 6     characters.")
       });
    });
 }); 

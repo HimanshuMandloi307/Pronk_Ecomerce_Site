@@ -16,6 +16,14 @@ class ReturnAndExchange{
         return $(`[role="alert"]`);
     }
 
+    get headlineTitle(){
+        return $(`[class="ship-log-headline ship-mb-2 ship-text-center"]`);
+    }
+
+    get headlineSubTitle(){
+        return $(`.ship-log-sub-head.ship-text-center`);
+    }
+
     async waitforPage(){
         await this.orderIdInputFileds.waitForDisplayed();
         await this.emailOrPhoneNoInputFileds.waitForDisplayed();

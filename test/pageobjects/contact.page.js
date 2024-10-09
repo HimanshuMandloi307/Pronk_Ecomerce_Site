@@ -18,6 +18,22 @@ class contactPage{
         return $(`//button[contains(text(),'Send')]`)
     }
 
+    get sucessNote(){
+        return $(`[class="note note--success"]`);
+    }
+
+    get getDetails(){
+        return $(`//div/b[contains(text(),'Get In Touch!')]`);
+    }
+
+    get telePhoneNumber(){
+        return $(`//a[@href="tel:+91%2077430%2006540"]`);
+    }
+
+    get emailId(){
+        return $(`[href="mailto:support@teeshut.in"]`)
+    }
+
     // page Mthods
 
     async waitforPage(){
