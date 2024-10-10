@@ -14,6 +14,10 @@ class LoginPage {
         return $('//span[@class="ui-button__text"]');
     }
 
+    get uiheading(){
+        return $(`(//h1[@class="ui-heading"])[1]`);
+    }
+
    
     async login (username, password) {
         await this.inputUsername.setValue(username);

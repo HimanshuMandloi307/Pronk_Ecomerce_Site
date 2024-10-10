@@ -10,12 +10,17 @@ class homePage{
         return $(`[class="icon icon-hamburger"]`);
     }
 
+    get logoImg(){
+        return $(`(//image-element/img[@itemprop="logo"])[2]`);
+    }
+
 
     // page Mthods
 
     async waitForPage(){
         await this.homepageTitle.waitForDisplayed();
         await this.hamburgerIcon.waitForDisplayed();
+        await this.logoImg.waitForDisplayed();
     }
 }
 export default new homePage();

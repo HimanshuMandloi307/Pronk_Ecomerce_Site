@@ -14,16 +14,30 @@ class trackOrderPage{
         return $(`[name="trackingNumber"]`);
     }
 
-     radioBtn(OptonName){
-        return $(`//input[@type='radio' and @value='${OptonName}']`);
+    searchByBtns(){
+        return $$('[class="chakra-text css-1v4xcoh"]');
     }
 
     get orderTrackingDeatils(){
         return $(`[class="css-h54b4a"]`);
     }
 
-    get VerifyTrackingIdNo(){
-        return $(`class="chakra-text css-1vg6q84"`);
+    get TrackingIdNo(){
+        return $(`//p[@class="chakra-text css-1vg6q84"]`);
+    }
+
+    // Page Methods
+
+    async selectSearchByOptions(OptionName){
+        const navigationLocator = await this.searchByBtns();
+        for (let temp of navigationLocator) {
+            const singleOptionText = await temp.getText();
+            if (singleOptionText === OptionName) {
+                await temp.click();
+                console.log("Selected Option Name: " + singleOptionText);
+                break;
+            }
+        }
     }
 }
 

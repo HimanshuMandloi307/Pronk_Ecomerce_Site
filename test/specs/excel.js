@@ -1,4 +1,5 @@
 //library for parsing JSON file
+const { default: AllureReporter } = require('@wdio/allure-reporter');
 const execlLib =require('xlsx')
 let fileData =execlLib.readFile('test/Data/Demo_Data_Automation_testing.xlsx')
 // test suite name
@@ -12,22 +13,9 @@ describe('Tutorialspoint application', function(){
    data.forEach(({ProductName,Size})  =>{
       //test case
       it('Data Driven testing', function(){ 
-        
+        AllureReporter.addStep("Check Produt Name and Size get from Excel Sheet",true);
         console.log('===============' +ProductName);
         console.log('///////' +Size);
-        //  launch url
-        //  browser.url('https://www.linkedin.com/login')  
-        //  //identify the email field then enter key - email
-        //  $("#username").setValue(email)
-        //  //identify password field then enter key - password
-        //  $("#password").setValue(password)
-        //  //identify Sign in button then click
-        //  $("button[type='submit']").click() 
-        //  //verify error message
-        //  const e = $('#error-for-password')
-        //  console.log(e.getText() + ' - Error Text') 
-        //  //verify Alert text with Chai assertion
-        //  c(e.getText()).to.equal("The password you provided must have at least 6     characters.")
       });
    });
 }); 
