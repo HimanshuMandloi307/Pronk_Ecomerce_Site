@@ -6,7 +6,7 @@ import contactPage from "../pageobjects/contact.page.js";
 import AllureReporter from "@wdio/allure-reporter";
 
 
-describe("Verify footer and goto Contact Page", () =>{
+describe("Verify footer menu and click on Contact Page", () =>{
 
     before(async () => {
         await browser.url(baseConfig.baseUrl);
@@ -28,22 +28,22 @@ describe("Verify footer and goto Contact Page", () =>{
         console.log("Thank you for Contacting Us. !!!!!!!!!!!!!!!!");
     })
 
-    it("Verify and Click on About Page",async()=>{
+    it("Verify contact details in contact page",async()=>{
         await contactPage.waitforPage();
-        await contactPage.addValueInInputFileds("himanshu57@gmail.com","Ansh","Hello i am root");
         AllureReporter.addStep("Enter Contact Details",true);
-        await contactPage.sendBtn.click();
+        await contactPage.addValueInInputFileds("himanshu57@gmail.com","Ansh","Hello i am root");
         AllureReporter.addStep("Click on send Button",true);
-        await expect(contactPage.sucessNote).toHaveText(expect.stringContaining('Thanks for contacting us'));
+        await contactPage.sendBtn.click();
         AllureReporter.addStep("Verify sucessful messeage",true);
+        await expect(contactPage.sucessNote).toHaveText(expect.stringContaining('Thanks for contacting us'));
     })
 
-    it("Verify InputFileds and send Message",async()=>{
+    it("Verify InputFileds and send Message in InputFileds",async()=>{
         await contactPage.waitforPage();
         await contactPage.getDetails.scrollIntoView();
+        AllureReporter.addStep("Verify TelePhone Number and Email Id",true);
         await expect(contactPage.telePhoneNumber).toHaveText('+91 77430 06540');
         await expect(contactPage.emailId).toHaveText('support@pronk.in');
-        AllureReporter.addStep("Verify TelePhone Number and Email Id",true);
     })
 
 })

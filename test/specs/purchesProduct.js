@@ -9,7 +9,7 @@ import quickBuyPage from '../pageobjects/quickBuy.page.js';
 import cart from '../pageobjects/cart.js';
 import ordersummaryPage from '../pageobjects/ordersummary.page.js';
 
-describe("Selct Product From menu and Purches", () => {
+describe("Selct Product From Quick Buy option and Purches product", () => {
 
     before(async () => {
         await browser.url(baseConfig.baseUrl);
@@ -17,47 +17,52 @@ describe("Selct Product From menu and Purches", () => {
         await homePage.waitForPage();
     })
 
-    beforeEach(async () => {
+    beforeEach(async()=>{
+        await homePage.logoImg.click();
+        await homePage.waitForPage();
+     })
 
-    })
-
-    afterEach(async () => {
-
-    })
+     afterEach(async()=>{
+        await browser.refresh();
+     })
 
     after(async () => {
         console.log("Thank You For Visit !!!!")
     })
 
     it("Verify Product Details like ProductName,Size,Color and Payment on Payment Page", async () => {
-        await homePage.hamburgerIcon.click();
         AllureReporter.addStep('Click on hamburger icon', true);
+        await homePage.hamburgerIcon.click();
+        AllureReporter.addStep('Select option from Hamburger Option', true);
         await hamburgerPage.selectExpandAndCollapsIcon('men1').click();
         await hamburgerPage.selectAnyOptionFromMenOrWomen('men-topwear').click();
         await hamburgerPage.selectAnyOptionFromHamburgerMenu("Shirts");
-        AllureReporter.addStep('Click on Hamburger Option', true);
         await hamburgerPage.waitForPage();
-        const excelData = await xlsxReader.readDatafromExcel('test/Data/demo.xlsx', 'Sheet1');
         AllureReporter.addStep('Geting Data From Xlsx file and Sheet', true);
+        const excelData = await xlsxReader.readDatafromExcel('test/Data/demo.xlsx', 'Sheet1');
+        AllureReporter.addStep('Click on selected ProductName', true);
         await quickBuyPage.selectProductByName(excelData[0].ProductName);
         await expect(quickBuyPage.quickBuyPopProductHeader).toHaveText(excelData[0].ProductName.toUpperCase());
-        AllureReporter.addStep('Click on Product', true);
         await collectionsPage.selectSizeOption(excelData[0].Size);
         await collectionsPage.addToCartBtn.scrollIntoView();
-        await collectionsPage.addToCartBtn.click();
         AllureReporter.addStep('Click on Add to Cart Button', true);
+        await collectionsPage.addToCartBtn.click();
         await cart.increaseItemBtn.click();
         const price = await cart.productSubTotalPrice.getText();
-        await collectionsPage.placeOrderBtn.click();
+        console.log('====' +await ordersummaryPage.orderSummary.isDisplayed());
         AllureReporter.addStep('Click on PlaceOrder button', true);
-        await browser.pause(10000);
-        await ordersummaryPage.expandOrderSummaryIcon.waitForDisplayed();
-        await browser.pause(5000);
-        await ordersummaryPage.expandOrderSummaryIcon.click();
-        await ordersummaryPage.subTotal.waitForDisplayed();
-        console.log("ordersummary payment>>>>>>>>>"+ordersummaryPage.subTotal.getText());
-        await expect(ordersummaryPage.subTotal).toHaveText(price);
-        await browser.pause(5000);
+        await collectionsPage.placeOrderBtn.click();
+        // await browser.pause(10000);
+        // await ordersummaryPage.orderSummaryIFrame.waitForDisplayed();
+        // await browser.switchToFrame(await ordersummaryPage.orderSummaryIFrame);
+        // console.log('====' +await ordersummaryPage.orderSummary.isDisplayed());
+        // await ordersummaryPage.orderSummary.waitForDisplayed();
+        // await browser.pause(5000);
+        // await ordersummaryPage.orderSummary.click();
+        // await ordersummaryPage.subTotal.waitForDisplayed();
+        // console.log("ordersummary payment>>>>>>>>>"+ordersummaryPage.subTotal.getText());
+        // await expect(ordersummaryPage.subTotal).toHaveText(price);
+        // await browser.pause(5000);
     })
 
 

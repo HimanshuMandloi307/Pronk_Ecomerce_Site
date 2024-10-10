@@ -6,7 +6,7 @@ import exchangeAndReturnPage from "../pageobjects/exchangeAndReturn.page.js";
 import AllureReporter from "@wdio/allure-reporter";
 
 
-describe("Verify footer and goto Contact Page", () =>{
+describe("Verify Return and Exchange Details in CreateReturnExhange Page", () =>{
 
     before(async () => {
         await browser.url(baseConfig.baseUrl);
@@ -29,18 +29,18 @@ describe("Verify footer and goto Contact Page", () =>{
 
     it("Verify Tittle on Exchange And Return Page",async()=>{
         await expect(exchangeAndReturnPage.headlineTitle).toBeDisplayed();
-        await expect(exchangeAndReturnPage.headlineSubTitle).toHaveText('Enter your order details to raise the request');
         AllureReporter.addStep("Verify Headline and SubHeadline to Be Displayed",true);
+        await expect(exchangeAndReturnPage.headlineSubTitle).toHaveText('Enter your order details to raise the request');
     })
 
     it("Verify InputFileds and Enter Details",async()=>{
         await exchangeAndReturnPage.waitforPage();
-        await exchangeAndReturnPage.addValueInInputFileds("0001001","9770648269");
         AllureReporter.addStep("Verify and Enter Order Details",true);
-        await exchangeAndReturnPage.requestBtn.click();
+        await exchangeAndReturnPage.addValueInInputFileds("0001001","9770648269");
         AllureReporter.addStep("Click on Request Button",true);
-        await expect(exchangeAndReturnPage.alertText).toHaveText(expect.stringContaining('please enter the correct details'));
+        await exchangeAndReturnPage.requestBtn.click();
         AllureReporter.addStep("Verify Alert Message",true);
+        await expect(exchangeAndReturnPage.alertText).toHaveText(expect.stringContaining('please enter the correct details'));
     })
 
 })

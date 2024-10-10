@@ -17,26 +17,26 @@ describe("Verify user is able to login and Logout",()=>{
         console.log("Thank you !!!!!!!!!!!!!!!!");
     })
 
-    it.only("Verify user is able to login", async () =>{
-        await headerPage.accountIcon.waitForClickable();
+    it("Verify user is able to login", async () =>{
         AllureReporter.addStep('Click on account icon', true);
+        await headerPage.accountIcon.waitForClickable();
         await headerPage.accountIcon.click();
         AllureReporter.addStep('Verify login title', true);
         await expect(loginPage.LoginPageTitle).toHaveText("Log in");
         AllureReporter.addStep('Add value in user input field', true);
         await loginPage.inputEmail.addValue("pawelet556@aiworldx.com");
-        await loginPage.ContinueBtn.click();
         AllureReporter.addStep('Click on continue button', true);
-        await expect(loginPage.uiheading).toHaveText("Enter code");
+        await loginPage.ContinueBtn.click();
         AllureReporter.addStep("Verify Verification Code on Page",true);
+        await expect(loginPage.uiheading).toHaveText("Enter code");
         await browser.closeWindow();
     })
 
     it("Verify User is able to Logout", async ()=>{
         await headerPage.accountIcon.click();
         await ordersPage.showAccountMenuBtn.click();
-        await ordersPage.logoutBtn.click();
         AllureReporter.addStep("Click on Logout Button",true);
+        await ordersPage.logoutBtn.click();
         await expect(homePage.hamburgerIcon).toBeDisplayed();
     })
 
