@@ -51,12 +51,22 @@ exports.config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
-        browserName: 'chrome',
-        'goog:chromeOptions': {
-            args: ['--disable-extensions', '--disable-plugins','--disable-gpu']
+    capabilities:  [
+        {
+            browserName: 'chrome',  // For Chrome
+            maxInstances: 2,
+            'goog:chromeOptions': {
+                args: ['--headless', '--disable-gpu']  // Optional: Run in headless mode
+            }
+        },
+        {
+            browserName: 'firefox',  // For Firefox
+            maxInstances: 2,
+            'moz:firefoxOptions': {
+                args: ['-headless']  // Optional: Run in headless mode
+            }
         }
-    }],
+    ],
 
     //
     // ===================
