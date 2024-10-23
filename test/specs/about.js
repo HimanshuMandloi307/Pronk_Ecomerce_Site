@@ -41,9 +41,6 @@ describe("Verify footer menu and goto About Page", () =>{
         await catalogPage.sectionHeaderText.waitForDisplayed();
         AllureReporter.addStep('Select Item from Catalog',true);
         const url = await catalogPage.selectCatalogName('all-graphics');
-        // let t = 'all-graphics';
-        // await catalogPage.catalogCollections(t).click();
-        // await expect(browser).toHaveUrl(expect.stringContaining(t.toLowerCase()));
     })
 
 })
