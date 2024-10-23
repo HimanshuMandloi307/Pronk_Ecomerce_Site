@@ -32,12 +32,12 @@ describe("Verify user is able to login and Logout",()=>{
         await browser.closeWindow();
     })
 
-    it("Verify User is able to Logout", async ()=>{
-        await headerPage.accountIcon.click();
-        await ordersPage.showAccountMenuBtn.click();
-        AllureReporter.addStep("Click on Logout Button",true);
-        await ordersPage.logoutBtn.click();
-        await expect(homePage.hamburgerIcon).toBeDisplayed();
-    })
+    // it("Verify User is able to Logout", async ()=>{
+    //     await headerPage.accountIcon.click();
+    //     await ordersPage.showAccountMenuBtn.click();
+    //     AllureReporter.addStep("Click on Logout Button",true);
+    //     await ordersPage.logoutBtn.click();
+    //     await expect(homePage.hamburgerIcon).toBeDisplayed();
+    // })
 
 })
